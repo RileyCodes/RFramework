@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="RLog.cpp" />
+    <ClCompile Include="RFrameworkException.cpp" />
+    <ClCompile Include="RTask.cpp">
+      <Filter>Task</Filter>
+    </ClCompile>
+    <ClCompile Include="RStopwatch.cpp" />
+    <ClCompile Include="RCooldown.cpp" />
+    <ClCompile Include="RTaskMgr.cpp">
+      <Filter>Task</Filter>
+    </ClCompile>
+    <ClCompile Include="RLinearTaskMgr.cpp">
+      <Filter>Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Linq\OrderBy.cpp">
+      <Filter>Linq</Filter>
+    </ClCompile>
+    <ClCompile Include="Linq\Remove.cpp">
+      <Filter>Linq</Filter>
+    </ClCompile>
+    <ClCompile Include="Linq\RLinq.cpp">
+      <Filter>Linq</Filter>
+    </ClCompile>
+    <ClCompile Include="Linq\Where.cpp">
+      <Filter>Linq</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="RLog.h" />
+    <ClInclude Include="RFrameworkException.h" />
+    <ClInclude Include="RTask.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="RStopwatch.h" />
+    <ClInclude Include="RCooldown.h" />
+    <ClInclude Include="RTaskMgr.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="RLinearTaskMgr.h">
+      <Filter>Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Linq\OrderBy.h">
+      <Filter>Linq</Filter>
+    </ClInclude>
+    <ClInclude Include="Linq\Remove.h">
+      <Filter>Linq</Filter>
+    </ClInclude>
+    <ClInclude Include="Linq\RLinq.h">
+      <Filter>Linq</Filter>
+    </ClInclude>
+    <ClInclude Include="Linq\Where.h">
+      <Filter>Linq</Filter>
+    </ClInclude>
+    <ClInclude Include="RLinqHeader.h">
+      <Filter>Linq</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Task">
+      <UniqueIdentifier>{5130ea7c-aa9f-4f38-873e-f47a44ef9e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Linq">
+      <UniqueIdentifier>{a63fde6f-2c6a-4a14-87d8-b04ff663e005}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

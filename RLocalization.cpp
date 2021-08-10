@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RLocalization.h"
 
+using namespace std;
 void RFramework::RLocalization::Parse(stringstream& jsonString)
 {
 	auto jsonArray = nlohmann::json::parse(jsonString);

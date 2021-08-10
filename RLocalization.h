@@ -9,22 +9,24 @@
 
 
 #include "RFrameworkException.h"
+#include "../ArkBot/LogType.h"
 
-using namespace std;
 
 namespace RFramework
 {
 	class RLocalization
 	{
-		unordered_map<string, unordered_map<string, string>> translate;
-		string userLang = "zh-cn";
-		ifstream localizationFile;
+		RLog* rLog = nullptr;
+		std::unordered_map<std::string, std::unordered_map<std::string, std::string>> translate;
+		std::string userLang = "zh-cn";
+		std::ifstream localizationFile;
 
-		void Parse(stringstream& jsonString);
+		void Parse(std::stringstream& jsonString);
 
 	public:
-		RLocalization()
+		RLocalization(RLog* rLog)
 		{
+			this->rLog = rLog;
 			localizationFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 			try
 			{
@@ -40,33 +42,33 @@ namespace RFramework
 				errorMsg += e.what();
 				throw RFrameworkException(errorMsg);
 			}
-
-
 		}
-
-
-
-
-		void SetUserLanguage(string userLang)
+		void SetUserLanguage(std::string userLang)
 		{
 			this->userLang = userLang;
 		}
 
-		string GetA(string msgType)
+		std::string GetA(std::string msgType)
 		{
 			if(translate.count(userLang) == 0)
 			{
-				
-				return "NO_STRING";
+				rLog->Add(LogLevel::Warning, LogType::LanguageNotFound, "Unable to Find Language:" + userLang);
+				return msgType;
+			}
+
+			if (translate[userLang].count(msgType) == 0)
+			{
+				rLog->Add(LogLevel::Warning, LogType::LanguageNotFound, "Unable to Find MsgType:" + msgType + " Language:" + userLang);
+				return msgType;
 			}
 			
 			return translate[userLang][msgType];
 		}
 
-		wstring GetW(string msgType)
+		std::wstring GetW(std::string msgType)
 		{
 			auto msgA = GetA(msgType);
-			wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 			return converter.from_bytes(msgA);
 		}
 	};

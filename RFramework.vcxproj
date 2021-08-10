@@ -125,6 +125,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -142,6 +143,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -152,17 +154,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="RLinqHeader.h" />
+    <ClInclude Include="Linq\OrderBy.h" />
+    <ClInclude Include="Linq\Remove.h" />
+    <ClInclude Include="Linq\RLinq.h" />
+    <ClInclude Include="Linq\Where.h" />
     <ClInclude Include="RApplication.h" />
+    <ClInclude Include="RCooldown.h" />
     <ClInclude Include="RFatalError.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="RLinearTaskMgr.h" />
     <ClInclude Include="RLocalization.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RLog.h" />
     <ClInclude Include="RFrameworkException.h" />
+    <ClInclude Include="RStopwatch.h" />
+    <ClInclude Include="RTask.h" />
+    <ClInclude Include="RTaskMgr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Linq\OrderBy.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Linq\Remove.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Linq\RLinq.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Linq\Where.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="RApplication.cpp" />
+    <ClCompile Include="RCooldown.cpp" />
     <ClCompile Include="RFatalError.cpp" />
+    <ClCompile Include="RLinearTaskMgr.cpp" />
     <ClCompile Include="RLocalization.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -172,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="RLog.cpp" />
     <ClCompile Include="RFrameworkException.cpp" />
+    <ClCompile Include="RStopwatch.cpp" />
+    <ClCompile Include="RTask.cpp" />
+    <ClCompile Include="RTaskMgr.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,7 +14,7 @@ namespace RFramework
 		try
 		{
 			rLog = new RLog();
-			rLocal = new RLocalization();
+			rLocal = new RLocalization(rLog);
 		}
 		catch (RFrameworkException e)
 		{
@@ -49,7 +49,7 @@ namespace RFramework
 	auto RApplication::GetRLocalization() -> RLocalization*
 	{
 		if (rLocal == nullptr)
-			RFramework::RFatalError::Raise(nullptr, nullptr, "RLocalization is not initialized!");
+			RFatalError::Raise(nullptr, nullptr, "RLocalization is not initialized!");
 		return rLocal;
 	}
 
