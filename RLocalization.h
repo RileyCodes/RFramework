@@ -1,3 +1,4 @@
+#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 #pragma once
 #include <codecvt>
 #include <fstream>

@@ -171,6 +171,7 @@
     <ClInclude Include="RStopwatch.h" />
     <ClInclude Include="RTask.h" />
     <ClInclude Include="RTaskMgr.h" />
+    <ClInclude Include="RTaskStopException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Linq\OrderBy.cpp">
@@ -205,6 +206,7 @@
     <ClCompile Include="RStopwatch.cpp" />
     <ClCompile Include="RTask.cpp" />
     <ClCompile Include="RTaskMgr.cpp" />
+    <ClCompile Include="RTaskStopException.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

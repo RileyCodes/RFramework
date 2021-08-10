@@ -9,6 +9,7 @@ public:
 	RCooldown() = default;
 	RCooldown(int cooldown)
 	{
+		stopwatch.Restart();
 		this->cooldown = cooldown;
 	}
 

@@ -3,6 +3,7 @@
 
 #include "RTask.h"
 #include "RTaskMgr.h"
+#include "RTaskStopException.h"
 
 #include "Linq/Remove.h"
 
@@ -11,11 +12,12 @@ namespace RFramework
 	class RLinearTaskMgr : public RTaskMgr
 	{
 		std::vector<RTask*> tasks;
+		bool isRunning = false;
 
 	public:
-		void AddTask(RTask* task)
+		void AddTask(RTask& task)
 		{
-			tasks.emplace_back(task);
+			tasks.emplace_back(&task);
 		}
 
 		void RemoveTask(RTask* task)
@@ -27,6 +29,10 @@ namespace RFramework
 		{
 			for (auto&& task : tasks)
 			{
+				if (!isRunning)
+				{
+					throw RTaskStopException();
+				}
 				auto result = task->Run();
 				if (result == TaskResult::FAILED)
 					break;
@@ -35,13 +41,32 @@ namespace RFramework
 
 		void Start()
 		{
+			auto rLog = RFramework::RApplication::GetRLog();
+			auto rLocal = RFramework::RApplication::GetRLocalization();
+			rLog->Add(RFramework::LogLevel::Info, LogType::TaskStarted, rLocal->GetA("TASK_STOPPED"));
+			isRunning = true;
 			std::chrono::milliseconds timespan(5);
-			while(1)
+			try
 			{
-				Run();
-				std::this_thread::sleep_for(timespan);
+				while(1)
+				{
+					Run();
+					std::this_thread::sleep_for(timespan);
+				}
 			}
+			catch (RTaskStopException e) {};
 		}
+
+		void Stop()
+		{
+			isRunning = false;
+		}
+
+		bool IsRunning()
+		{
+			return isRunning;
+		}
+		
 	};
 
 }

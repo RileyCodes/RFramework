@@ -14,6 +14,8 @@ namespace RFramework
 	{
 		FatalError,
 		LanguageNotFound,
+		TaskStarted,
+		TaskStopped,
 	};
 
 	
