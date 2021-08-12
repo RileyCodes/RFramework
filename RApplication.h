@@ -12,7 +12,6 @@ namespace RFramework
 		static RLocalization* rLocal;
 
 	public:
-
 		static void Initialization();
 		static void Dispose();
 

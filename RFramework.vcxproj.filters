@@ -30,6 +30,35 @@
     <ClCompile Include="RTaskStopException.cpp">
       <Filter>Task</Filter>
     </ClCompile>
+    <ClCompile Include="RApplication.cpp" />
+    <ClCompile Include="RFatalError.cpp" />
+    <ClCompile Include="RLocalization.cpp" />
+    <ClCompile Include="RInputsimulator.cpp" />
+    <ClCompile Include="CV\FileCapturer.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\FileCapturerException.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\ImageCapturer.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\ImageMatcher.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\ScreenCapturer.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\TemplateMgr.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="RPixelMatching.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="CV\line2Dup.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
+    <ClCompile Include="RShapeMaching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -65,6 +94,35 @@
     <ClInclude Include="RTaskStopException.h">
       <Filter>Task</Filter>
     </ClInclude>
+    <ClInclude Include="RApplication.h" />
+    <ClInclude Include="RFatalError.h" />
+    <ClInclude Include="RLocalization.h" />
+    <ClInclude Include="RInputsimulator.h" />
+    <ClInclude Include="CV\FileCapturer.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\FileCapturerException.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\ImageCapturer.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\ImageMatcher.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\ScreenCapturer.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\TemplateMgr.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="RPixelMatching.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="CV\line2Dup.h">
+      <Filter>CV</Filter>
+    </ClInclude>
+    <ClInclude Include="RShapeMaching.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Task">
@@ -72,6 +130,9 @@
     </Filter>
     <Filter Include="Linq">
       <UniqueIdentifier>{a63fde6f-2c6a-4a14-87d8-b04ff663e005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CV">
+      <UniqueIdentifier>{7fa4ca50-ba26-4e9d-92e6-b52d7324367f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

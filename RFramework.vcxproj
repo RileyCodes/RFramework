@@ -79,9 +79,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\project\opencv\install\include;cv/MIPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\project\opencv\install\x64\vc16\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\project\opencv\install\include;cv/MIPP;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\project\opencv\install\x64\vc16\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,6 +158,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CV\FileCapturer.h" />
+    <ClInclude Include="CV\FileCapturerException.h" />
+    <ClInclude Include="CV\ImageCapturer.h" />
+    <ClInclude Include="CV\ImageMatcher.h" />
+    <ClInclude Include="CV\line2Dup.h" />
+    <ClInclude Include="CV\ScreenCapturer.h" />
+    <ClInclude Include="CV\TemplateMgr.h" />
+    <ClInclude Include="RInputsimulator.h" />
     <ClInclude Include="RLinqHeader.h" />
     <ClInclude Include="Linq\OrderBy.h" />
     <ClInclude Include="Linq\Remove.h" />
@@ -168,12 +180,42 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="RLog.h" />
     <ClInclude Include="RFrameworkException.h" />
+    <ClInclude Include="RPixelMatching.h" />
+    <ClInclude Include="RShapeMaching.h" />
     <ClInclude Include="RStopwatch.h" />
     <ClInclude Include="RTask.h" />
     <ClInclude Include="RTaskMgr.h" />
     <ClInclude Include="RTaskStopException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CV\FileCapturer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\FileCapturerException.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\ImageCapturer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\ImageMatcher.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\line2Dup.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\ScreenCapturer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CV\TemplateMgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Linq\OrderBy.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -193,6 +235,7 @@
     <ClCompile Include="RApplication.cpp" />
     <ClCompile Include="RCooldown.cpp" />
     <ClCompile Include="RFatalError.cpp" />
+    <ClCompile Include="RInputsimulator.cpp" />
     <ClCompile Include="RLinearTaskMgr.cpp" />
     <ClCompile Include="RLocalization.cpp" />
     <ClCompile Include="pch.cpp">
@@ -203,6 +246,8 @@
     </ClCompile>
     <ClCompile Include="RLog.cpp" />
     <ClCompile Include="RFrameworkException.cpp" />
+    <ClCompile Include="RPixelMatching.cpp" />
+    <ClCompile Include="RShapeMaching.cpp" />
     <ClCompile Include="RStopwatch.cpp" />
     <ClCompile Include="RTask.cpp" />
     <ClCompile Include="RTaskMgr.cpp" />
