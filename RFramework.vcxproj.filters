@@ -58,7 +58,9 @@
     <ClCompile Include="CV\line2Dup.cpp">
       <Filter>CV</Filter>
     </ClCompile>
-    <ClCompile Include="RShapeMaching.cpp" />
+    <ClCompile Include="RShapeMaching.cpp">
+      <Filter>CV</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -122,7 +124,9 @@
     <ClInclude Include="CV\line2Dup.h">
       <Filter>CV</Filter>
     </ClInclude>
-    <ClInclude Include="RShapeMaching.h" />
+    <ClInclude Include="RShapeMaching.h">
+      <Filter>CV</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Task">
