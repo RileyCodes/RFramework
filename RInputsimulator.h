@@ -3,6 +3,9 @@
 #include <thread>
 #include <Windows.h>
 
+
+#include "RTask.h"
+#include "RWait.h"
 #include "CV/ImageMatcher.h"
 
 
@@ -12,8 +15,11 @@ namespace RFramework
 	class RInputsimulator
 	{
 		INPUT buffer;
+		RWait* rWait = nullptr;
 
 		std::chrono::milliseconds timespan;
+
+		
 		
 		POINT GetScreenSize()
 		{
@@ -44,6 +50,13 @@ namespace RFramework
 		{
 			timespan = std::chrono::milliseconds(100);
 		}
+
+		void Init(RWait* rWait)
+		{
+			this->rWait = rWait;
+		}
+		
+		
 		void MoveMouse(int x, int y)
 		{
 			MouseSetup();

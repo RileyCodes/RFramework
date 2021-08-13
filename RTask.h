@@ -1,6 +1,11 @@
 #pragma once
 #include <chrono>
+#include <mutex>
+#include <thread>
+
 #include "RCooldown.h"
+#include "RTaskStopException.h"
+#include <windows.h>
 
 using std::string;
 namespace RFramework
@@ -16,6 +21,7 @@ namespace RFramework
 	{
 		string taskName;
 		RCooldown rCooldown;
+		bool* isRunning = nullptr;
 	protected:
 		virtual TaskResult _Run() = 0;
 
@@ -25,6 +31,17 @@ namespace RFramework
 			this->taskName = taskName;
 			this->rCooldown.Set(cooldown);
 		}
+
+		void SetRunningPtr(bool& isRunning)
+		{
+			this->isRunning = &isRunning;
+		}
+
+		bool IsRunning()
+		{
+			return *this->isRunning;
+		}
+		
 
 		TaskResult Run()
 		{

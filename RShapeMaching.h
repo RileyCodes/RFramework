@@ -1,6 +1,7 @@
 #pragma once
 #include "CV/ImageMatcher.h"
 #include "CV/line2Dup.h"
+//Credits to: https://github.com/meiqua/shape_based_matching
 
 namespace line2Dup {
 	class Detector;

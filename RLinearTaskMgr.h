@@ -17,6 +17,7 @@ namespace RFramework
 	public:
 		void AddTask(RTask& task)
 		{
+			task.SetRunningPtr(isRunning);
 			tasks.emplace_back(&task);
 		}
 

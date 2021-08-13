@@ -11,6 +11,7 @@ public:
 	void Restart()
 	{
 		begin = steady_clock::now();
+		isStarted = true;
 	}
 
 	int GetElapsedTime() const
@@ -19,7 +20,7 @@ public:
 			return 0;
 		
 		auto now = steady_clock::now();
-		return duration_cast<microseconds>(now - begin).count();
+		return duration_cast<milliseconds>(now - begin).count();
 	}
 };
 

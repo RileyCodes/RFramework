@@ -5,15 +5,15 @@
     <ClCompile Include="RLog.cpp" />
     <ClCompile Include="RFrameworkException.cpp" />
     <ClCompile Include="RTask.cpp">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="RStopwatch.cpp" />
     <ClCompile Include="RCooldown.cpp" />
     <ClCompile Include="RTaskMgr.cpp">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="RLinearTaskMgr.cpp">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="Linq\OrderBy.cpp">
       <Filter>Linq</Filter>
@@ -28,7 +28,7 @@
       <Filter>Linq</Filter>
     </ClCompile>
     <ClCompile Include="RTaskStopException.cpp">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="RApplication.cpp" />
     <ClCompile Include="RFatalError.cpp" />
@@ -61,6 +61,10 @@
     <ClCompile Include="RShapeMaching.cpp">
       <Filter>CV</Filter>
     </ClCompile>
+    <ClCompile Include="RStateMachine.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="RWait.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -68,15 +72,15 @@
     <ClInclude Include="RLog.h" />
     <ClInclude Include="RFrameworkException.h" />
     <ClInclude Include="RTask.h">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="RStopwatch.h" />
     <ClInclude Include="RCooldown.h" />
     <ClInclude Include="RTaskMgr.h">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="RLinearTaskMgr.h">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="Linq\OrderBy.h">
       <Filter>Linq</Filter>
@@ -94,7 +98,7 @@
       <Filter>Linq</Filter>
     </ClInclude>
     <ClInclude Include="RTaskStopException.h">
-      <Filter>Task</Filter>
+      <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="RApplication.h" />
     <ClInclude Include="RFatalError.h" />
@@ -127,16 +131,20 @@
     <ClInclude Include="RShapeMaching.h">
       <Filter>CV</Filter>
     </ClInclude>
+    <ClInclude Include="RStateMachine.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="RWait.h" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Task">
-      <UniqueIdentifier>{5130ea7c-aa9f-4f38-873e-f47a44ef9e05}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Linq">
       <UniqueIdentifier>{a63fde6f-2c6a-4a14-87d8-b04ff663e005}</UniqueIdentifier>
     </Filter>
     <Filter Include="CV">
       <UniqueIdentifier>{7fa4ca50-ba26-4e9d-92e6-b52d7324367f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{5130ea7c-aa9f-4f38-873e-f47a44ef9e05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
