@@ -7,9 +7,18 @@
 #include "RTaskStopException.h"
 #include <windows.h>
 
+
+
 using std::string;
 namespace RFramework
 {
+	struct RunningState
+	{
+		bool isRunning = false;
+		std::mutex lock;
+		std::condition_variable condition;
+
+	};
 	enum class TaskResult
 	{
 		FAILED,
@@ -21,8 +30,9 @@ namespace RFramework
 	{
 		string taskName;
 		RCooldown rCooldown;
-		bool* isRunning = nullptr;
+		
 	protected:
+		RunningState* runningState = nullptr;
 		virtual TaskResult _Run() = 0;
 
 	public:
@@ -32,14 +42,14 @@ namespace RFramework
 			this->rCooldown.Set(cooldown);
 		}
 
-		void SetRunningPtr(bool& isRunning)
+		void SetRunningPtr(RunningState& runningState)
 		{
-			this->isRunning = &isRunning;
+			this->runningState = &runningState;
 		}
 
 		bool IsRunning()
 		{
-			return *this->isRunning;
+			return this->runningState->isRunning;
 		}
 		
 

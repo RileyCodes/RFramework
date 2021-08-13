@@ -17,7 +17,7 @@ namespace RFramework
 		INPUT buffer;
 		RWait* rWait = nullptr;
 
-		std::chrono::milliseconds timespan;
+		const int waitTime = 100;
 
 		
 		
@@ -45,12 +45,7 @@ namespace RFramework
 		}
 
 	public:
-
-		RInputsimulator()
-		{
-			timespan = std::chrono::milliseconds(100);
-		}
-
+		
 		void Init(RWait* rWait)
 		{
 			this->rWait = rWait;
@@ -71,7 +66,7 @@ namespace RFramework
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE);
 
 			SendInput(1, &buffer, sizeof(buffer));
-			std::this_thread::sleep_for(timespan);
+			rWait->Wait(waitTime);
 		}
 
 		void MouseClick(int x, int y)
@@ -80,8 +75,8 @@ namespace RFramework
 			MoveMouse(x, y);
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN);
 			SendInput(1, &buffer, sizeof(buffer));
-
-			std::this_thread::sleep_for(timespan);
+			
+			rWait->Wait(waitTime);
 
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP);
 			SendInput(1, &buffer, sizeof(buffer));

@@ -9,15 +9,24 @@
 
 namespace RFramework
 {
+
+
 	class RLinearTaskMgr : public RTaskMgr
 	{
 		std::vector<RTask*> tasks;
-		bool isRunning = false;
 
+		RunningState runningState;
+
+		void _Start()
+		{
+			std::unique_lock <std::mutex> lock(runningState.lock);
+			runningState.isRunning = true;
+		}
+	
 	public:
 		void AddTask(RTask& task)
 		{
-			task.SetRunningPtr(isRunning);
+			task.SetRunningPtr(runningState);
 			tasks.emplace_back(&task);
 		}
 
@@ -30,7 +39,7 @@ namespace RFramework
 		{
 			for (auto&& task : tasks)
 			{
-				if (!isRunning)
+				if (!runningState.isRunning)
 				{
 					throw RTaskStopException();
 				}
@@ -39,33 +48,33 @@ namespace RFramework
 					break;
 			}
 		}
-
+		
 		void Start()
 		{
+			_Start();
+			
 			auto rLog = RFramework::RApplication::GetRLog();
 			auto rLocal = RFramework::RApplication::GetRLocalization();
-			rLog->Add(RFramework::LogLevel::Info, LogType::TaskStarted, rLocal->GetA("TASK_STOPPED"));
-			isRunning = true;
+			rLog->Add(RFramework::LogLevel::Info, LogType::TaskStarted, rLocal->GetA("TASK_STARTED"));
+			
 			std::chrono::milliseconds timespan(5);
-			try
+			while(1)
 			{
-				while(1)
-				{
-					Run();
-					std::this_thread::sleep_for(timespan);
-				}
+				Run();
+				std::this_thread::sleep_for(timespan);
 			}
-			catch (RTaskStopException e) {};
 		}
 
 		void Stop()
 		{
-			isRunning = false;
+			std::unique_lock <std::mutex> lock(runningState.lock);
+			runningState.isRunning = false;
+			runningState.condition.notify_all();
 		}
 
 		bool IsRunning()
 		{
-			return isRunning;
+			return runningState.isRunning;
 		}
 		
 	};

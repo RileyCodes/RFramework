@@ -81,6 +81,11 @@ namespace RFramework
 					"<" + std::to_string(static_cast<int>(type)) + ">:" + msg + "\n";
 				logFile << logMessage;
 				logFile.flush();
+#ifdef _DEBUG
+				std::cout << logMessage << std::endl;
+#endif
+				
+				
 			}
 			catch (const std::ofstream::failure& e) {
 				std::string errorMsg = "Exception while write log: \n";
