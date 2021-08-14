@@ -5,7 +5,8 @@
 
 
 
-
+#include "RRectUIElement.h"
+#include "RTask.h"
 #include "RWait.h"
 #include "CV/ImageMatcher.h"
 
@@ -13,10 +14,11 @@
 namespace RFramework
 {
 
-	class RInputsimulator
+	class RInputSimulator
 	{
 		INPUT buffer;
 		RWait* rWait = nullptr;
+		RWait defaultRWait;
 
 		const int waitTime = 100;
 		
@@ -43,6 +45,13 @@ namespace RFramework
 			buffer.mi.dwExtraInfo = 0;
 		}
 
+		RWait* GetRWait()
+		{
+			if (rWait == nullptr)
+				return &defaultRWait;
+			return rWait;
+		}
+
 	public:
 		void Init(RWait* rWait)
 		{
@@ -63,7 +72,7 @@ namespace RFramework
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE);
 
 			SendInput(1, &buffer, sizeof(buffer));
-			rWait->Wait(waitTime);
+			GetRWait()->Wait(waitTime);
 		}
 
 		void MouseClick(int x, int y)
@@ -73,7 +82,7 @@ namespace RFramework
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN);
 			SendInput(1, &buffer, sizeof(buffer));
 			
-			rWait->Wait(waitTime);
+			GetRWait()->Wait(waitTime);
 
 			buffer.mi.dwFlags = (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP);
 			SendInput(1, &buffer, sizeof(buffer));
@@ -84,32 +93,61 @@ namespace RFramework
 			MouseClick(match.x, match.y);
 		}
 
-		//void MouseClick(RRectUIElement& rectUIElement)
-		//{
-		//	auto point = rectUIElement.GetClickPosition();
-		//	MouseClick(point.x, point.y);
-		//}
+		void MouseClick(RRectUIElement& rectUIElement)
+		{
+			auto point = rectUIElement.GetClickPosition();
+			MouseClick(point.x, point.y);
+		}
 
-		//void PressKey(char mK)
-		//{
-		//	HKL kbl = GetKeyboardLayout(0);
-		//	INPUT ip;
-		//	ip.type = INPUT_KEYBOARD;
-		//	ip.ki.time = 0;
-		//	ip.ki.dwFlags = KEYEVENTF_UNICODE;
-		//	if ((int)mK < 65 && (int)mK>90) //for lowercase
-		//	{
-		//		ip.ki.wScan = 0;
-		//		ip.ki.wVk = VkKeyScanEx(mK, kbl);
-		//	}
-		//	else //for uppercase
-		//	{
-		//		ip.ki.wScan = mK;
-		//		ip.ki.wVk = 0;
+		void KeyPress(char mK)
+		{
+			HKL kbl = GetKeyboardLayout(0);
+			INPUT ip;
+			ip.type = INPUT_KEYBOARD;
+			ip.ki.time = 0;
+			ip.ki.dwFlags = KEYEVENTF_UNICODE;
+			if (static_cast<int>(mK) < 65 && static_cast<int>(mK)>90) //for lowercase
+			{
+				ip.ki.wScan = 0;
+				ip.ki.wVk = VkKeyScanEx(mK, kbl);
+			}
+			else //for uppercase
+			{
+				ip.ki.wScan = mK;
+				ip.ki.wVk = 0;
 
-		//	}
-		//	ip.ki.dwExtraInfo = 0;
-		//	SendInput(1, &ip, sizeof(INPUT));
-		//}
+			}
+			ip.ki.dwExtraInfo = 0;
+			SendInput(1, &ip, sizeof(INPUT));
+		}
+		void KeyDown(WORD keyCode)
+		{
+			INPUT Event = { 0 };
+			Event.type = INPUT_KEYBOARD;
+			Event.ki.dwFlags = KEYEVENTF_SCANCODE;
+			Event.ki.wScan = MapVirtualKey(keyCode, 0);
+			SendInput(1, &Event, sizeof(Event));
+		}
+
+		void KeyUp(WORD keyCode)
+		{
+			INPUT Event = { 0 };
+			Event.type = INPUT_KEYBOARD;
+			Event.ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
+			Event.ki.wScan = MapVirtualKey(keyCode, 0);
+			SendInput(1, &Event, sizeof(Event));
+		}
+
+		void ComboKey(WORD key1,WORD key2)
+		{
+			KeyDown(key1);
+			GetRWait()->Wait(50);
+			KeyDown(key2);
+			GetRWait()->Wait(50);
+			KeyUp(key1);
+			GetRWait()->Wait(50);
+			KeyUp(key2);
+			GetRWait()->Wait(50);
+		}
 	};
 }

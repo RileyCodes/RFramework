@@ -167,7 +167,7 @@
     <ClInclude Include="CV\TemplateMgr.h" />
     <ClInclude Include="RRectUIElement.h" />
     <ClInclude Include="RStateMachine.h" />
-    <ClInclude Include="RInputsimulator.h" />
+    <ClInclude Include="RInputSimulator.h" />
     <ClInclude Include="RLinqHeader.h" />
     <ClInclude Include="Linq\OrderBy.h" />
     <ClInclude Include="Linq\Remove.h" />
@@ -240,7 +240,7 @@
     <ClCompile Include="RFatalError.cpp" />
     <ClCompile Include="RRectUIElement.cpp" />
     <ClCompile Include="RStateMachine.cpp" />
-    <ClCompile Include="RInputsimulator.cpp" />
+    <ClCompile Include="RInputSimulator.cpp" />
     <ClCompile Include="RLinearTaskMgr.cpp" />
     <ClCompile Include="RLocalization.cpp" />
     <ClCompile Include="pch.cpp">

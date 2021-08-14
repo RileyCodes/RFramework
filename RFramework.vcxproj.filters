@@ -33,7 +33,7 @@
     <ClCompile Include="RApplication.cpp" />
     <ClCompile Include="RFatalError.cpp" />
     <ClCompile Include="RLocalization.cpp" />
-    <ClCompile Include="RInputsimulator.cpp" />
+    <ClCompile Include="RInputSimulator.cpp" />
     <ClCompile Include="CV\FileCapturer.cpp">
       <Filter>CV</Filter>
     </ClCompile>
@@ -104,7 +104,7 @@
     <ClInclude Include="RApplication.h" />
     <ClInclude Include="RFatalError.h" />
     <ClInclude Include="RLocalization.h" />
-    <ClInclude Include="RInputsimulator.h" />
+    <ClInclude Include="RInputSimulator.h" />
     <ClInclude Include="CV\FileCapturer.h">
       <Filter>CV</Filter>
     </ClInclude>

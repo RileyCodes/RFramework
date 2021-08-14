@@ -6,16 +6,12 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/xfeatures2d.hpp>
 
+#include "../RRectUIElement.h"
+
+#include "SharedTypes.h"
 using cv::Mat;
 
-struct ImageMatchResult
-{
-	int x = 0;
-	int y = 0;
-	double score = 0;
-	int width = 0;
-	int height = 0;
-};
+
 
 
 class ImageMatcher

@@ -3,12 +3,16 @@
 #include <thread>
 #include "RStopwatch.h"
 #include <functional>
-
+#include <Windows.h>
 namespace RFramework
 {
 	class RWait
 	{
-		std::function<bool(int) > action = nullptr;
+		std::function<bool(int) > action = [](int time)
+		{
+			Sleep(time);
+			return true;
+		};
 	public:
 
 		void Init(std::function<bool(int) > action)

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RLog.h"
+#include "RApplication.h"
 class RTaskStopException : public std::exception
 {
     std::string errMessage = "Task Stopped";
