@@ -11,8 +11,8 @@ using namespace std;
 // NMS, got from cv::dnn so we don't need opencv contrib
 // just collapse it
 
-std::string RShapeMatching::prefix = "./templ/";
-std::unordered_map<std::string, line2Dup::Detector> RShapeMatching::detectors;
+std::string RFramework::RShapeMatching::prefix = "./templ/";
+std::unordered_map<std::string, line2Dup::Detector> RFramework::RShapeMatching::detectors;
 
 namespace  cv_dnn {
 	namespace
@@ -106,125 +106,134 @@ namespace  cv_dnn {
 }
 
 
-ImageMatchResult RShapeMatching::Match(string objectName, const Mat& img,float score, bool isDebug)
+
+namespace RFramework
 {
-	std::vector<std::string> ids;
-	ids.push_back(objectName);
-	//ids.push_back("test");
 
-	auto detector = GetDetector(objectName);
-
-
-	// cvtColor(test_img, test_img, CV_BGR2GRAY);
-
-	int stride = 16;
-	int n = img.rows / stride;
-	int m = img.cols / stride;
-	Rect roi(0, 0, stride * m, stride * n);
-
-	Mat img2 = img(roi).clone();
-
-	line2Dup::Timer timer;
-	auto matches = detector.match(img2, 90, ids);
-	if(!isDebug)
+	ImageMatchResult RShapeMatching::Match(string objectName, const Mat& img, float score, bool isDebug)
 	{
-		ImageMatchResult imageMatchResult;
-		if(matches.size() > 0 && matches[0].similarity > score)
+		std::vector<std::string> ids;
+		ids.push_back(objectName);
+		//ids.push_back("test");
+
+		auto detector = GetDetector(objectName);
+
+
+		// cvtColor(test_img, test_img, CV_BGR2GRAY);
+
+		int stride = 16;
+		int n = img.rows / stride;
+		int m = img.cols / stride;
+		Rect roi(0, 0, stride * m, stride * n);
+
+		Mat img2 = img(roi).clone();
+
+		line2Dup::Timer timer;
+		auto matches = detector.match(img2, 90, ids);
+		if (!isDebug)
 		{
-			imageMatchResult.x = matches[0].x;
-			imageMatchResult.y = matches[0].y;
-			imageMatchResult.score = matches[0].similarity;
+			ImageMatchResult imageMatchResult;
+			if (matches.size() > 0 && matches[0].similarity > score)
+			{
+				imageMatchResult.x = matches[0].x;
+				imageMatchResult.y = matches[0].y;
+				imageMatchResult.score = matches[0].similarity;
+				imageMatchResult.height = img.rows;
+				imageMatchResult.width = img.rows;
+			}
+			return imageMatchResult;
 		}
-		return imageMatchResult;
-	}
-
-	if (isDebug)
-		std::cout << "matches.size(): " << matches.size() << std::endl;
-
-	size_t top5 = 500;
-	if (top5 > matches.size()) top5 = matches.size();
-
-	vector<Rect> boxes;
-	vector<float> scores;
-	vector<int> idxs;
-	for (auto match : matches) {
-		Rect box;
-		box.x = match.x;
-		box.y = match.y;
-
-		auto templ = detector.getTemplates(objectName,
-			match.template_id);
-
-		box.width = templ[0].width;
-		box.height = templ[0].height;
-		boxes.push_back(box);
-		scores.push_back(match.similarity);
-	}
-	cv_dnn::NMSBoxes(boxes, scores, 0, 0.5f, idxs);
-
-	for (auto idx : idxs) {
-		auto match = matches[idx];
-		auto templ = detector.getTemplates(objectName,
-			match.template_id);
-
-		int x = templ[0].width + match.x;
-		int y = templ[0].height + match.y;
-		int r = templ[0].width / 2;
-		cv::Vec3b randColor;
-		randColor[0] = rand() % 155 + 100;
-		randColor[1] = rand() % 155 + 100;
-		randColor[2] = rand() % 155 + 100;
 
 		if (isDebug)
-		{
-			for (int i = 0; i < templ[0].features.size(); i++) {
-				auto feat = templ[0].features[i];
-				cv::circle(img, { feat.x + match.x, feat.y + match.y }, 2, randColor, -1);
-			}
+			std::cout << "matches.size(): " << matches.size() << std::endl;
 
-			cv::putText(img, to_string(int(round(match.similarity))),
-				Point(match.x + r - 10, match.y - 3), FONT_HERSHEY_PLAIN, 2, randColor);
-			cv::rectangle(img, { match.x, match.y }, { x, y }, randColor, 2);
+		size_t top5 = 500;
+		if (top5 > matches.size()) top5 = matches.size();
+
+		vector<Rect> boxes;
+		vector<float> scores;
+		vector<int> idxs;
+		for (auto match : matches) {
+			Rect box;
+			box.x = match.x;
+			box.y = match.y;
+
+			auto templ = detector.getTemplates(objectName,
+				match.template_id);
+
+			box.width = templ[0].width;
+			box.height = templ[0].height;
+			boxes.push_back(box);
+			scores.push_back(match.similarity);
+		}
+		cv_dnn::NMSBoxes(boxes, scores, 0, 0.5f, idxs);
+
+		for (auto idx : idxs) {
+			auto match = matches[idx];
+			auto templ = detector.getTemplates(objectName,
+				match.template_id);
+
+			int x = templ[0].width + match.x;
+			int y = templ[0].height + match.y;
+			int r = templ[0].width / 2;
+			cv::Vec3b randColor;
+			randColor[0] = rand() % 155 + 100;
+			randColor[1] = rand() % 155 + 100;
+			randColor[2] = rand() % 155 + 100;
+
+			if (isDebug)
+			{
+				for (int i = 0; i < templ[0].features.size(); i++) {
+					auto feat = templ[0].features[i];
+					cv::circle(img, { feat.x + match.x, feat.y + match.y }, 2, randColor, -1);
+				}
+
+				cv::putText(img, to_string(int(round(match.similarity))),
+					Point(match.x + r - 10, match.y - 3), FONT_HERSHEY_PLAIN, 2, randColor);
+				cv::rectangle(img, { match.x, match.y }, { x, y }, randColor, 2);
 
 
 				std::cout << "\nmatch.template_id: " << match.template_id << std::endl;
 				std::cout << "match.similarity: " << match.similarity << std::endl;
 			}
-	}
-	if (isDebug)
-	{
-		imshow("img", img);
-		waitKey(0);
-		std::cout << "test end" << std::endl << std::endl;
-	}
-	timer.out("Total time");
-}
-
-void RShapeMatching::Train(std::string objectName)
-{
-	line2Dup::Detector detector(150, { 4, 8 });
-	Mat img = imread(prefix + "train/" + objectName + ".png");
-	assert(!img.empty() && "check your img path");
-	Mat mask = Mat(img.size(), CV_8UC1, { 255 });
-
-	shape_based_matching::shapeInfo_producer shapes(img, mask);
-	shapes.angle_range = { -2, 2 };
-	shapes.angle_step = 0.1;
-	shapes.produce_infos();
-	std::vector<shape_based_matching::shapeInfo_producer::Info> infos_have_templ;
-	string class_id = objectName;
-	for (auto& info : shapes.infos) {
-		imshow("train", shapes.src_of(info));
-		waitKey(1);
-
-		std::cout << "\ninfo.angle: " << info.angle << std::endl;
-		int templ_id = detector.addTemplate(shapes.src_of(info), class_id, shapes.mask_of(info));
-		std::cout << "templ_id: " << templ_id << std::endl;
-		if (templ_id != -1) {
-			infos_have_templ.push_back(info);
 		}
+		if (isDebug)
+		{
+			imshow("img", img);
+			waitKey(0);
+			std::cout << "test end" << std::endl << std::endl;
+		}
+		timer.out("Total time");
 	}
-	detector.writeClasses(prefix + "%s_templ.yaml");
-	shapes.save_infos(infos_have_templ, prefix + "test_info.yaml");
-	std::cout << "train end" << std::endl << std::endl;
+	
+	void RShapeMatching::Train(std::string objectName)
+	{
+		line2Dup::Detector detector(150, { 4, 8 });
+		Mat img = imread(prefix + "train/" + objectName + ".png");
+		assert(!img.empty() && "check your img path");
+		Mat mask = Mat(img.size(), CV_8UC1, { 255 });
+
+		shape_based_matching::shapeInfo_producer shapes(img, mask);
+		shapes.angle_range = { -2, 2 };
+		shapes.angle_step = 0.1;
+		shapes.produce_infos();
+		std::vector<shape_based_matching::shapeInfo_producer::Info> infos_have_templ;
+		string class_id = objectName;
+		for (auto& info : shapes.infos) {
+			imshow("train", shapes.src_of(info));
+			waitKey(1);
+
+			std::cout << "\ninfo.angle: " << info.angle << std::endl;
+			int templ_id = detector.addTemplate(shapes.src_of(info), class_id, shapes.mask_of(info));
+			std::cout << "templ_id: " << templ_id << std::endl;
+			if (templ_id != -1) {
+				infos_have_templ.push_back(info);
+			}
+		}
+		detector.writeClasses(prefix + "%s_templ.yaml");
+		shapes.save_infos(infos_have_templ, prefix + "test_info.yaml");
+		std::cout << "train end" << std::endl << std::endl;
+	}
+
 }
+

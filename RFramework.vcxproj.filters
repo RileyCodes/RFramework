@@ -65,6 +65,7 @@
       <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="RWait.cpp" />
+    <ClCompile Include="RRectUIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -135,6 +136,7 @@
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="RWait.h" />
+    <ClInclude Include="RRectUIElement.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Linq">

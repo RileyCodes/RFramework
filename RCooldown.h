@@ -4,7 +4,7 @@
 class RCooldown
 {
 	RStopwatch stopwatch;
-	int cooldown = 0;
+	int cooldown = -1;
 public:
 	RCooldown() = default;
 	RCooldown(int cooldown)
@@ -20,6 +20,9 @@ public:
 
 	bool Try()
 	{
+		if (cooldown == -1)//If the cooldown is not enabled, we will not restart the cooldown.
+			return true;
+		
 		if(stopwatch.GetElapsedTime() >= cooldown)
 		{
 			stopwatch.Restart();

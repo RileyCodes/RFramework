@@ -7,33 +7,37 @@ namespace line2Dup {
 	class Detector;
 }
 
-class RShapeMatching
+namespace RFramework
 {
-	static std::string prefix;
 
-	static std::unordered_map<std::string, line2Dup::Detector> detectors;
-
-	static void LoadDetector(std::string detectorName)
+	class RShapeMatching
 	{
-		detectors[detectorName] = line2Dup::Detector(30, { 4, 8 });
-		std::vector<std::string> ids;
-		ids.push_back(detectorName);
-		detectors[detectorName].readClasses(ids, prefix  +  "%s_templ.yaml");
-	}
+		static std::string prefix;
 
-public:
+		static std::unordered_map<std::string, line2Dup::Detector> detectors;
 
-	static line2Dup::Detector& GetDetector(std::string detectorName)
-	{
-		if(detectors.count(detectorName) == 0)
+		static void LoadDetector(std::string detectorName)
 		{
-			LoadDetector(detectorName);
+			detectors[detectorName] = line2Dup::Detector(30, { 4, 8 });
+			std::vector<std::string> ids;
+			ids.push_back(detectorName);
+			detectors[detectorName].readClasses(ids, prefix + "%s_templ.yaml");
 		}
-		return detectors[detectorName];
-	}
-	
-	static ImageMatchResult Match(std::string objectName, const cv::Mat& img, float score, bool isDebug = true);
 
-	static void Train(std::string objectName);
-};
+	public:
 
+		static line2Dup::Detector& GetDetector(std::string detectorName)
+		{
+			if (detectors.count(detectorName) == 0)
+			{
+				LoadDetector(detectorName);
+			}
+			return detectors[detectorName];
+		}
+
+		static ImageMatchResult Match(std::string objectName, const cv::Mat& img, float score, bool isDebug = true);
+
+		static void Train(std::string objectName);
+	};
+
+}

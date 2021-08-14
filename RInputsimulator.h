@@ -4,7 +4,8 @@
 #include <Windows.h>
 
 
-#include "RTask.h"
+
+
 #include "RWait.h"
 #include "CV/ImageMatcher.h"
 
@@ -18,8 +19,6 @@ namespace RFramework
 		RWait* rWait = nullptr;
 
 		const int waitTime = 100;
-
-		
 		
 		POINT GetScreenSize()
 		{
@@ -45,12 +44,10 @@ namespace RFramework
 		}
 
 	public:
-		
 		void Init(RWait* rWait)
 		{
 			this->rWait = rWait;
 		}
-		
 		
 		void MoveMouse(int x, int y)
 		{
@@ -87,5 +84,32 @@ namespace RFramework
 			MouseClick(match.x, match.y);
 		}
 
+		//void MouseClick(RRectUIElement& rectUIElement)
+		//{
+		//	auto point = rectUIElement.GetClickPosition();
+		//	MouseClick(point.x, point.y);
+		//}
+
+		//void PressKey(char mK)
+		//{
+		//	HKL kbl = GetKeyboardLayout(0);
+		//	INPUT ip;
+		//	ip.type = INPUT_KEYBOARD;
+		//	ip.ki.time = 0;
+		//	ip.ki.dwFlags = KEYEVENTF_UNICODE;
+		//	if ((int)mK < 65 && (int)mK>90) //for lowercase
+		//	{
+		//		ip.ki.wScan = 0;
+		//		ip.ki.wVk = VkKeyScanEx(mK, kbl);
+		//	}
+		//	else //for uppercase
+		//	{
+		//		ip.ki.wScan = mK;
+		//		ip.ki.wVk = 0;
+
+		//	}
+		//	ip.ki.dwExtraInfo = 0;
+		//	SendInput(1, &ip, sizeof(INPUT));
+		//}
 	};
 }

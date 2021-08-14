@@ -165,6 +165,7 @@
     <ClInclude Include="CV\line2Dup.h" />
     <ClInclude Include="CV\ScreenCapturer.h" />
     <ClInclude Include="CV\TemplateMgr.h" />
+    <ClInclude Include="RRectUIElement.h" />
     <ClInclude Include="RStateMachine.h" />
     <ClInclude Include="RInputsimulator.h" />
     <ClInclude Include="RLinqHeader.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="RApplication.cpp" />
     <ClCompile Include="RCooldown.cpp" />
     <ClCompile Include="RFatalError.cpp" />
+    <ClCompile Include="RRectUIElement.cpp" />
     <ClCompile Include="RStateMachine.cpp" />
     <ClCompile Include="RInputsimulator.cpp" />
     <ClCompile Include="RLinearTaskMgr.cpp" />

@@ -1,4 +1,4 @@
-
+#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 #pragma once
 
 #include "ImageCapturer.h"
@@ -13,6 +13,8 @@ struct ImageMatchResult
 	int x = 0;
 	int y = 0;
 	double score = 0;
+	int width = 0;
+	int height = 0;
 };
 
 
