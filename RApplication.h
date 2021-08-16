@@ -5,7 +5,6 @@
 
 namespace RFramework
 {
-	
 	class RApplication
 	{
 		static RLog* rLog;

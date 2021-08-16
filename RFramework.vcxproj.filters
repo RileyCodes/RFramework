@@ -66,6 +66,8 @@
     </ClCompile>
     <ClCompile Include="RWait.cpp" />
     <ClCompile Include="RRectUIElement.cpp" />
+    <ClCompile Include="RClipboard.cpp" />
+    <ClCompile Include="RHotKeyMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -137,6 +139,8 @@
     </ClInclude>
     <ClInclude Include="RWait.h" />
     <ClInclude Include="RRectUIElement.h" />
+    <ClInclude Include="RClipboard.h" />
+    <ClInclude Include="RHotKeyMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Linq">

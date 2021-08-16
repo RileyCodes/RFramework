@@ -1,3 +1,5 @@
+
+#include "../RRectUIElement.h"
 struct ImageMatchResult
 {
 	int x = 0;

@@ -45,6 +45,17 @@ namespace RFramework
 			buffer.mi.dwExtraInfo = 0;
 		}
 
+	public:
+		void IncreaseAdditionalWaitTime()
+		{
+			GetRWait()->IncreaseAdditionalWaitTime();
+		}
+
+		void DecreaseAdditionalWaitTime()
+		{
+			GetRWait()->DecreaseAdditionalWaitTime();
+		}
+
 		RWait* GetRWait()
 		{
 			if (rWait == nullptr)
@@ -52,7 +63,6 @@ namespace RFramework
 			return rWait;
 		}
 
-	public:
 		void Init(RWait* rWait)
 		{
 			this->rWait = rWait;
@@ -93,9 +103,9 @@ namespace RFramework
 			MouseClick(match.x, match.y);
 		}
 
-		void MouseClick(RRectUIElement& rectUIElement)
+		void MouseClick(const RRectUIElement& rectUIElement)
 		{
-			auto point = rectUIElement.GetClickPosition();
+			auto point = const_cast<RRectUIElement&>(rectUIElement).GetClickPosition();
 			MouseClick(point.x, point.y);
 		}
 
@@ -144,10 +154,12 @@ namespace RFramework
 			GetRWait()->Wait(50);
 			KeyDown(key2);
 			GetRWait()->Wait(50);
-			KeyUp(key1);
-			GetRWait()->Wait(50);
 			KeyUp(key2);
 			GetRWait()->Wait(50);
+			KeyUp(key1);
+			GetRWait()->Wait(50);
 		}
+
+		bool Action(std::function<bool()> action, int retryCount = 0, int increaseThreshold = 2);
 	};
 }

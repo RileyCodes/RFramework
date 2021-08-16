@@ -9,6 +9,7 @@ Mat ScreenCapturer::Capture()
 
 	
     src.create(height, width, CV_8UC4);
+   
 
     bi.biSize = sizeof(BITMAPINFOHEADER);
     bi.biWidth = width;
@@ -26,6 +27,6 @@ Mat ScreenCapturer::Capture()
     SelectObject(hwindowCompatibleDC, hbwindow);
     StretchBlt(hwindowCompatibleDC, 0, 0, width, height, hwindowDC, 0, 0, width, height, SRCCOPY); //change SRCCOPY to NOTSRCCOPY for wacky colors !
     GetDIBits(hwindowCompatibleDC, hbwindow, 0, height, src.data, (BITMAPINFO*)&bi, DIB_RGB_COLORS);  //copy from hwindowCompatibleDC to hbwindow
-
+    cvtColor(src, src, CV_BGRA2BGR);
     return src;
 }

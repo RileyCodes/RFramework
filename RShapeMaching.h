@@ -18,7 +18,7 @@ namespace RFramework
 
 		static void LoadDetector(std::string detectorName)
 		{
-			detectors[detectorName] = line2Dup::Detector(30, { 4, 8 });
+			detectors[detectorName] = line2Dup::Detector(30, { 4, 4 });
 			std::vector<std::string> ids;
 			ids.push_back(detectorName);
 			detectors[detectorName].readClasses(ids, prefix + "%s_templ.yaml");
@@ -37,7 +37,7 @@ namespace RFramework
 
 		static ImageMatchResult Match(std::string objectName, const cv::Mat& img, float score, bool isDebug = true);
 
-		static void Train(std::string objectName);
+		static void Train(std::string objectName, std::vector<float> angleRange = { -1, 1});
 	};
 
 }

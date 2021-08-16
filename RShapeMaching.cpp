@@ -106,12 +106,12 @@ namespace  cv_dnn {
 }
 
 
-
 namespace RFramework
 {
 
 	ImageMatchResult RShapeMatching::Match(string objectName, const Mat& img, float score, bool isDebug)
 	{
+
 		std::vector<std::string> ids;
 		ids.push_back(objectName);
 		//ids.push_back("test");
@@ -129,23 +129,27 @@ namespace RFramework
 		Mat img2 = img(roi).clone();
 
 		line2Dup::Timer timer;
-		auto matches = detector.match(img2, 90, ids);
-		if (!isDebug)
+		auto matches = detector.match(img2, 80, ids);
+		ImageMatchResult imageMatchResult;
+		if (matches.size() > 0 && matches[0].similarity > score)
 		{
-			ImageMatchResult imageMatchResult;
-			if (matches.size() > 0 && matches[0].similarity > score)
-			{
-				imageMatchResult.x = matches[0].x;
-				imageMatchResult.y = matches[0].y;
-				imageMatchResult.score = matches[0].similarity;
-				imageMatchResult.height = img.rows;
-				imageMatchResult.width = img.rows;
-			}
-			return imageMatchResult;
-		}
+			imageMatchResult.x = matches[0].x;
+			imageMatchResult.y = matches[0].y;
 
-		if (isDebug)
-			std::cout << "matches.size(): " << matches.size() << std::endl;
+			
+			imageMatchResult.score = matches[0].similarity;
+
+			auto templ = detector.getTemplates(objectName,matches[0].template_id);
+			
+			imageMatchResult.height = templ[0].height;
+			imageMatchResult.width = templ[0].width;
+		}
+		
+		if (!isDebug)
+			return imageMatchResult;
+		timer.out("Total time");
+
+		std::cout << "matches.size(): " << matches.size() << std::endl;
 
 		size_t top5 = 500;
 		if (top5 > matches.size()) top5 = matches.size();
@@ -181,40 +185,36 @@ namespace RFramework
 			randColor[1] = rand() % 155 + 100;
 			randColor[2] = rand() % 155 + 100;
 
-			if (isDebug)
-			{
-				for (int i = 0; i < templ[0].features.size(); i++) {
-					auto feat = templ[0].features[i];
-					cv::circle(img, { feat.x + match.x, feat.y + match.y }, 2, randColor, -1);
-				}
-
-				cv::putText(img, to_string(int(round(match.similarity))),
-					Point(match.x + r - 10, match.y - 3), FONT_HERSHEY_PLAIN, 2, randColor);
-				cv::rectangle(img, { match.x, match.y }, { x, y }, randColor, 2);
-
-
-				std::cout << "\nmatch.template_id: " << match.template_id << std::endl;
-				std::cout << "match.similarity: " << match.similarity << std::endl;
+			for (int i = 0; i < templ[0].features.size(); i++) {
+				auto feat = templ[0].features[i];
+				cv::circle(img, { feat.x + match.x, feat.y + match.y }, 2, randColor, -1);
 			}
+
+			cv::putText(img, to_string(int(round(match.similarity))),
+				Point(match.x + r - 10, match.y - 3), FONT_HERSHEY_PLAIN, 2, randColor);
+			cv::rectangle(img, { match.x, match.y }, { x, y }, randColor, 2);
+
+
+			std::cout << "\nmatch.template_id: " << match.template_id << std::endl;
+			std::cout << "match.similarity: " << match.similarity << std::endl;
 		}
-		if (isDebug)
-		{
-			imshow("img", img);
-			waitKey(0);
-			std::cout << "test end" << std::endl << std::endl;
-		}
-		timer.out("Total time");
+		imshow("img", img);
+		
+		waitKey(0);
+		std::cout << "test end" << std::endl << std::endl;
+		
+		return imageMatchResult;
 	}
 	
-	void RShapeMatching::Train(std::string objectName)
+	void RShapeMatching::Train(std::string objectName,std::vector<float> angleRange)
 	{
-		line2Dup::Detector detector(150, { 4, 8 });
+		line2Dup::Detector detector(30, { 4,4 });
 		Mat img = imread(prefix + "train/" + objectName + ".png");
 		assert(!img.empty() && "check your img path");
 		Mat mask = Mat(img.size(), CV_8UC1, { 255 });
 
 		shape_based_matching::shapeInfo_producer shapes(img, mask);
-		shapes.angle_range = { -2, 2 };
+		shapes.angle_range = angleRange;
 		shapes.angle_step = 0.1;
 		shapes.produce_infos();
 		std::vector<shape_based_matching::shapeInfo_producer::Info> infos_have_templ;
@@ -231,7 +231,7 @@ namespace RFramework
 			}
 		}
 		detector.writeClasses(prefix + "%s_templ.yaml");
-		shapes.save_infos(infos_have_templ, prefix + "test_info.yaml");
+		//shapes.save_infos(infos_have_templ, prefix + "test_info.yaml");
 		std::cout << "train end" << std::endl << std::endl;
 	}
 

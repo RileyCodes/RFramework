@@ -165,6 +165,8 @@
     <ClInclude Include="CV\line2Dup.h" />
     <ClInclude Include="CV\ScreenCapturer.h" />
     <ClInclude Include="CV\TemplateMgr.h" />
+    <ClInclude Include="RClipboard.h" />
+    <ClInclude Include="RHotKeyMgr.h" />
     <ClInclude Include="RRectUIElement.h" />
     <ClInclude Include="RStateMachine.h" />
     <ClInclude Include="RInputSimulator.h" />
@@ -236,8 +238,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RApplication.cpp" />
+    <ClCompile Include="RClipboard.cpp" />
     <ClCompile Include="RCooldown.cpp" />
     <ClCompile Include="RFatalError.cpp" />
+    <ClCompile Include="RHotKeyMgr.cpp" />
     <ClCompile Include="RRectUIElement.cpp" />
     <ClCompile Include="RStateMachine.cpp" />
     <ClCompile Include="RInputSimulator.cpp" />

@@ -1475,7 +1475,7 @@ void Detector::readClasses(const std::vector<std::string> &class_ids,
         const String &class_id = class_ids[i];
         String filename = cv::format(format.c_str(), class_id.c_str());
         FileStorage fs(filename, FileStorage::READ);
-        readClass(fs.root());
+         readClass(fs.root());
     }
 }
 
