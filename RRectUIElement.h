@@ -18,8 +18,11 @@ public:
 	void Init();
 	RRectUIElement(int x, int y);
 	RRectUIElement(ImageMatchResult& result);
+	RRectUIElement(RRectUIElement& result);
 	void SetConverter(std::function<cv::Point(const RRectUIElement&)> converter);
 	void FromImageMatchResult(const ImageMatchResult& result);
 	cv::Point GetClickPosition() const;
+
+	RRectUIElement CreateByOffset(int offsetX,int offsetY);
 };
 

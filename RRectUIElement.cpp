@@ -26,6 +26,17 @@ RRectUIElement::RRectUIElement(ImageMatchResult& result)
 	FromImageMatchResult(result);
 	Init();
 }
+
+RRectUIElement::RRectUIElement(RRectUIElement& result)
+{
+	Init();
+	this->x = result.x;
+	this->y = result.y;
+	this->score = result.score;
+	this->width = result.width;
+	this->height = result.height;
+}
+
 void RRectUIElement::SetConverter(std::function<cv::Point(const RRectUIElement&)> converter)
 {
 	this->converter = converter;
@@ -43,4 +54,12 @@ void RRectUIElement::FromImageMatchResult(const ImageMatchResult& result)
 cv::Point RRectUIElement::GetClickPosition() const
 {
 	return converter(*this);
+}
+
+RRectUIElement RRectUIElement::CreateByOffset(int offsetX, int offsetY)
+{
+	RRectUIElement newUI(*this);
+	newUI.x += offsetX;
+	newUI.y += offsetY;
+	return newUI;
 }

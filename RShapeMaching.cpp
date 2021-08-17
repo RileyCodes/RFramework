@@ -129,7 +129,7 @@ namespace RFramework
 		Mat img2 = img(roi).clone();
 
 		line2Dup::Timer timer;
-		auto matches = detector.match(img2, 80, ids);
+		auto matches = detector.match(img2, score * 100, ids);
 		ImageMatchResult imageMatchResult;
 		if (matches.size() > 0 && matches[0].similarity > score)
 		{
