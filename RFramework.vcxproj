@@ -165,6 +165,7 @@
     <ClInclude Include="CV\line2Dup.h" />
     <ClInclude Include="CV\ScreenCapturer.h" />
     <ClInclude Include="CV\TemplateMgr.h" />
+    <ClInclude Include="DllExport.h" />
     <ClInclude Include="RClipboard.h" />
     <ClInclude Include="RHotKeyMgr.h" />
     <ClInclude Include="RRectUIElement.h" />
@@ -221,6 +222,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DllExport.cpp" />
     <ClCompile Include="Linq\OrderBy.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

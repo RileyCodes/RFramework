@@ -68,6 +68,7 @@
     <ClCompile Include="RRectUIElement.cpp" />
     <ClCompile Include="RClipboard.cpp" />
     <ClCompile Include="RHotKeyMgr.cpp" />
+    <ClCompile Include="DllExport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="RRectUIElement.h" />
     <ClInclude Include="RClipboard.h" />
     <ClInclude Include="RHotKeyMgr.h" />
+    <ClInclude Include="DllExport.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Linq">
